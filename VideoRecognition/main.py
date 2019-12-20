@@ -2,62 +2,60 @@
 from __future__ import division
 
 import cv2
-import dlib
+import imutils
 import numpy as np
 from imutils import face_utils
-### Image processing ###
-from scipy.ndimage import zoom
-from scipy.spatial import distance
-from tensorflow.keras.models import load_model
-from imutils.video import FileVideoStream
 from imutils.video import FPS
-import imutils
-import time
+from imutils.video import FileVideoStream
+from scipy.ndimage import zoom
+
+from VideoRecognition.emotion_recognition import emotion_recognition
+from VideoRecognition.face_recognition import load_utilities_to_face_recognition, eye_aspect_ratio
+
+### Image processing ###
+
 global shape_x
 global shape_y
 global input_shape
 global nClasses
 
-def show_webcam():
-    shape_x = 48
-    shape_y = 48
-    def eye_aspect_ratio(eye):
-        A = distance.euclidean(eye[1], eye[5])
-        B = distance.euclidean(eye[2], eye[4])
-        C = distance.euclidean(eye[0], eye[3])
-        ear = (A + B) / (2.0 * C)
-        return ear
 
-    (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
-    (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
-
-    (nStart, nEnd) = face_utils.FACIAL_LANDMARKS_IDXS["nose"]
-    (mStart, mEnd) = face_utils.FACIAL_LANDMARKS_IDXS["mouth"]
-    (jStart, jEnd) = face_utils.FACIAL_LANDMARKS_IDXS["jaw"]
-
-    (eblStart, eblEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eyebrow"]
-    (ebrStart, ebrEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eyebrow"]
-
-    model = load_model('Models/video.h5')
-    face_detect = dlib.get_frontal_face_detector()
-    predictor_landmarks = dlib.shape_predictor("Models/face_landmarks.dat")
-
-    # Lancer la capture video
-    #video_capture = cv2.VideoCapture(0)
-    #input_movie = cv2.VideoCapture("Videos/Manifestacja.mp4")
-    #length = int(input_movie.get(cv2.CAP_PROP_FRAME_COUNT))
-
-    print("[INFO] starting video file thread...")
-    fvs = FileVideoStream("Videos/Manifestacja.mp4").start()
-    time.sleep(1.0)
-    # start the FPS timer
-    fps = FPS().start()
+def analyze_Video_without_displaying(videoFilePath, resize=False):
+    model, face_detect, predictor_landmarks = load_utilities_to_face_recognition()
+    fvs = FileVideoStream(videoFilePath).start()
     while fvs.more():
-        # Grab a single frame of video
         frame = fvs.read()
         if frame is None:
             break
-        frame = imutils.resize(frame, width=720)
+        if resize:
+            frame = imutils.resize(frame, width=720)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = np.dstack([frame, frame, frame])
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        rects = face_detect(gray, 0)
+        emotion_recognition(rects, gray, model, predictor_landmarks)
+    fvs.stop()
+
+
+def analyze_Video_with_displaying(videoFilePath, resize=False):
+    shape_x=48
+    shape_y=48
+    (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
+    (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
+    (nStart, nEnd) = face_utils.FACIAL_LANDMARKS_IDXS["nose"]
+    (mStart, mEnd) = face_utils.FACIAL_LANDMARKS_IDXS["mouth"]
+    (jStart, jEnd) = face_utils.FACIAL_LANDMARKS_IDXS["jaw"]
+    (eblStart, eblEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eyebrow"]
+    (ebrStart, ebrEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eyebrow"]
+    model, face_detect, predictor_landmarks = load_utilities_to_face_recognition()
+    fvs = FileVideoStream("Videos/Manifestacja.mp4").start()
+    fps = FPS().start()
+    while fvs.more():
+        frame = fvs.read()
+        if frame is None:
+            break
+        if resize:
+            frame = imutils.resize(frame, width=720)
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         frame = np.dstack([frame, frame, frame])
         # display the size of the queue on the frame
@@ -65,9 +63,6 @@ def show_webcam():
                     (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rects = face_detect(gray, 0)
-        #print(rects.toString())
-        #gray, detected_faces, coord = detect_face(frame)
-
         for (i, rect) in enumerate(rects):
 
             shape = predictor_landmarks(gray, rect)
@@ -180,20 +175,15 @@ def show_webcam():
         cv2.imshow("Frame", frame)
         cv2.waitKey(1)
         fps.update()
-
-    # stop the timer and display FPS information
     fps.stop()
     print("[INFO] elapsed time: {:.2f}".format(fps.elapsed()))
     print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
-
-    # do a bit of cleanup
     cv2.destroyAllWindows()
     fvs.stop()
 
 
 def main():
-    show_webcam()
-    print("done")
+    analyze_Video_with_displaying("Videos/Manifestacja.mp4")
 
 
 if __name__ == "__main__":
