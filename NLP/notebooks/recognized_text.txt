@@ -1,0 +1,263 @@
+welcome everyone to 2019 it's really good to see everybody here making in the cold this is 6 a 0 9 4 keep learning for self-driving cars
+it is part of a series of courses on deep learning that were running throughout this month
+the website that you can get all the content the videos of lectures and the code is deep learning that mit.edu the videos and slides will be made available there along with a GitHub repository that's a company in the course assignments register students will be emailed later on in the week and you can always contact us with questions concerns comments at htai human-centered AI at mit.edu
+so it starts with the basics the fundamentals
+to summarize in one slide what is deep learning it is a way to extract useful patterns from data in an automated way was as little human effort involved as possible hence the automated how the fundamental aspect that we'll talk about a lot is the optimization of neural networks
+the Practical nature that will provide to the code and so on is that there is
+libraries that make it accessible and easy to do some of the most powerful things in deep learning using Python tensorflow and Friends
+the hard part always with machine learning artificial intelligence in general is asking good questions and getting good data a lot of times the exciting aspects of what's the news covers and a lot of exciting aspects of what is published and after the procedures conferences and an archive and a blogpost is the methodology the hard part is applying the methodology to solve real-world problems to solve a problem that requires organizing and labeling selecting the answers to the questions you ask
+so why has this breakthrough over the past decade of the application of neural networks the ideas in your own that works what has happened what has changed have been around since the 1940s and ideas have been percolating even before
+the digitization of information data the ability to access data easily in a distributed fashion across the world all kinds of problems have now digital form they can be accessed by learning algorithms Hardware compute both the Moore's lures CPU and GPU and Asics Google TPU systems Hardware that enables the efficient effective large-scale execution of these algorithms
+Community people hear people all over the world by being able to work together to talk to each other to feed the fire of excitement behind machine learning
+GitHub and Beyond
+the tooling is will talk about tensorflow pytorch and everything in between
+that enables the a person with an idea to reach a solution in less and less and less time
+higher and higher levels of abstraction Empower people to solve problems in less and less time with less and less knowledge where the idea and the day that become the Central Point not the effort that takes you from the idea to the solution
+and it's been a lot of exciting progress some of which will talk about from face recognition to the general problem of as seen understanding image classification to speech text natural language processing transcription translation in medical applications and medical diagnosis and cars being able to solve Minneapolis up reception in autonomous vehicles with Dr what area Lane detection object detection digital assistants ones on your phone and Beyond the ones in your house a home ads recommender systems from Netflix to search the social Facebook
+and of course deeper in Portsmouth learning successes in the playing of games from board games to Starcraft and DotA
+let's take a step back
+deep learning is more than a set of tools to solve practical problems
+Pamela McCormick said in 79 a I began with the ancient wish to force the Gods
+throughout our history
+Trotter civilization human civilization we've dreamed about creating Echoes of whatever is in this mind of ours in the machine and creating living organisms from the popular culture in the 1800's with Frankenstein to ex machina this vision is dream understanding intelligence and creating intelligence is captivated all of us
+and deep-learning is at the core of that because there's aspects of it the learning aspects that captivator imagination about what is possible given data and methodology what learning learning to learn and Beyond how far they can take us
+and Kira visualizes just 3% of the neurons and one-millionth of the synapses in our own brain that's incredible structure that's in our mind and there's only Echoes of it small Shadows of it in artificial neural networks are able to create but nevertheless those Echoes are inspiring to us
+the history of neural networks
+on this pale blue dot of ours
+started quite a while ago
+with Summers and Winters with excitement and periods of pessimism starting in the forties with neural networks and implementation of those neural networks as a perceptron in the 50s with ideas of Brad propagation
+I restricted Baltimore machines recurrent neural networks in the seventies and eighties with convolution neural networks and the mnist dataset with data says beginning to percolating lstms bi-directional are announced in the 90s and the rebranding and The Rebirth of neuron that works under the flag of deep learning and deep belief nuts in 2006 the birth of imagenet the data set that on which the possibilities of what deep learning can bring to the world has been first Illustrated in the recent years in 2009 and Alex not the network that I'm imagenet performed exactly that with a few ideas like drop off and improving your level of silver time every year by year improving the performance when you're not works in 2014 the idea of Gams the young lady who called the most exciting idea of the last 20 years that generative adversarial networks with very little supervision generate data to generate ideas after forming representation of those from the understanding from the high-level abstractions and what is extracted in the day to be able to create the ability to the world
+I was inspired captivated in 2016 with alphago and 17 without the 0 beating with less and less and less effort the best players in the in the world that go the problem that for most of the history of artificial intelligence thought to be unsolvable and you ideas of capsule networks and this year is the year 2018 was the year of natural language processing a lot of interesting breakthroughs and others that will talk about breakthroughs on ability to understand language understand speech and everything including generation that's built all around that
+and there's a parallel history of tooling starting in the 60s with a perceptron and the wiring diagrams there ending with this year with pytorch 1.0 and tensorflow 2.0 these really solidified exciting powerful ecosystems of tools that enable you to do very to do a lot with very little effort
+sky is the limit thanks for the tooling
+so let's then from the big picture taking to the smallest
+everything should be made as simple as possible
+let's let's start simple with a little piece of code
+before we jump
+into the details and a big run through everything that is possible in deep learning
+at the very basic level with just a few lines of code really 6 here six little pieces of code you can train in your own that work that understand what's going on in the image the classic that I will always love and this dataset the handwritten digits for the input to a neural network on machine Learning System is a picture of a handwritten digit and the output is the number that's in that digit
+it's a simple as in the first step
+import the library tensorflow
+Second Step import the data set mnist third step like Lego bricks stacked on top of each other than your own network layer by layer with a hidden layer I input layer Nopalera
+stop for train the model as simple as a single line model fit
+evaluate the model and step 5 on the testing data set and that's it stop 6 you're ready to deploy you're ready to predict what's in the image it's a simple as that and much of this code obviously much more complicated or
+much more elaborate and rich in interesting and complex will be making available on GitHub on our repository that accompanies these courses today will release the first tutorial on driver see segmentation I encourage everybody to go through it
+and then on the tooling side in one slide before we dive into the neural networks and deep-learning the tooling side amongst many other things tensorflow is a deep learning library and open source library from Google
+the most popular want to date the most active with a large ecosystem it's not just something you import in Python and to solve some basic problems there's an entire ecosystem of tooling
+there's different levels of apis much of what we doing this course will be the highest level API with Charis but there's also the ability to run in the browser with tensorflow js on the phone with tensorflow light in the cloud without any need to have a computer hardware anything any of the library set up on your machine you can run all the code that we're providing in the cloud with Google colab collaboratory and the optimized A6 Hardware that Google is optimized for their TPU tensor Processing Unit ability to visualize tensorboard models
+make it extremely accessible to understand the fundamentals of the tooling that allow you to solve the problems of natural language processing to computer vision to Gans Jenner by the Sea on their own that works and everything in between with deep reinforcement learning and so on so that that's why we were excited to sort of work both in the theory and its course
+at in the series of lectures and in the in the tooling and they applied side of tensorflow it really makes it exceptionally these ideas Inception accessible so deep learning at the core is the ability to form higher and higher level of abstractions of representations in data and raw patterns higher and higher levels of understanding of patterns
+and those representations
+are extremely important
+and effective for being able to interpret data
+under certain representations data is Trivial to understand cat versus dog blue dot versus green triangle
+under others is much more difficult in this in this task drawing a line under polar coordinates is Trivial under Cartesian coordinates is very difficult to impossible to do accurately
+and that's a true example of a representation so I tasked with deep learning with machine learning and general it's forming representations that map topology this whatever the topology the rich space of the problem you're trying to deal with of the raw inputs map it in such a way
+that the final representation is Trivial to work with trivial to classify
+trivial to perform regression trivial to generate new samples of that data and that representation of higher and higher levels of representation is really the dream of artificial intelligence that is what understanding is making the complex simple like like Einstein back in a few slides ago said
+and that's with your against Mini Cooper and whoever else set it I don't know the that's been the dream of all of Science in general
+the history of science is the history of compression progress forming simpler
+and simpler
+representations of ideas
+the the models of the universe of our solar system with the Earth at the center of it is much more complex to perform to do physics on then a model where the sun is at the center of those higher and higher levels of simple representations enable us to do extremely powerful things that has been the dream of Science and the dream of artificial intelligence
+and why deep learning
+what is so special about deep learning in the grander world in machine learning and artificial intelligence
+accessibility to more and more remove the input of human experts remove the human from the picture the human costly inefficient effort of human beings in the picture
+deep learning automates much of the extraction from the get us closer and closer to the raw data without the need of human involvement human expert involvement related to form representations from the raw data as opposed to having a human being mean to extract features as was done in the eighties and nineties in the early aughts to extract features with which then the machine learning algorithms can work with the automated extraction and features enables us to work with large and large datasets removing the human completely accept from the supervision labeling Step at the very end it doesn't require the human expert
+but at the same time
+there is
+limits to our Technologies there's always a balance between excitement and disillusionment the Gartner hype cycle
+as much as we don't like to think about it applies to almost every single technology of course the magnitude of the peaks in the drawers is different
+but I would say we are at the peak of inflated expectation with deep learning
+and that's something we have to think about it we talk about somebody ideas and exciting possibly is the future
+and was self-driving cars that will talk about in future lectures in this course we're at the same in fact we're live would be on the peak and so it's up to us this is MIT in the engineers and the people working on this in the world to carry us through the Draught to carry us through the future as the ups and downs of the excitement progresses forward
+into the plateau productivity
+why else not deep learning
+if we look at real world applications
+especially with humanoid robotics Rock manipulation
+and even yes autonomous vehicles majority the aspects of the Thomas Vehicles do not involve to an extensive amount machine learning today
+The Palms in not formulated is data-driven learning instead their model-based optimization methods that don't learn from debt over time and then from the speakers these follow these couple of weeks we'll get to see how much machine learning starting to creep in but the example shown here with the Boston with amazing humanoid robotics in Boston Dynamics
+to-date almost no machine learning has been used except for trivial perception the same with autonomous vehicles almost no machine learning deep learning has be used except with perception
+some aspect of enhanced perception from the visual texture information
+plus was becoming with starting to be used a little bit more is use of recurrent neural networks to predict the future to predict the the intent of the different players in the scene in order to anticipate with the future is but he's a very early steps most of the success of DC today the 10 million miles away
+has been attributed mostly to non machine learning methods
+wine while snot deep learning
+here's a really clean example of unintended consequences
+ethical issues
+we have to really think about when an algorithm learns from data base and an objective function a loss function
+the power the
+consequences of an algorithm that optimize that function is not always obvious here's an example of a human player playing the game of Coast Runners with a it's a boat racing game where the task is to go around the racetrack and try to win the race and the objective is to get as many points as possible there are three ways to get points the finishing time how long it took you to finish the finishing position where you were in the ranking and picking up quote on quote turbos those little green things along the way they give you points okay simple enough so we design agent in this case for the awards right here the optimal agent discovers that The Optimist actually has nothing to do with finishing the race or the ranking they can get much more points by just focusing on the trouble and collecting those because they regenerate
+that's why not deep learning exclusively
+the challenge of deep learning algorithms of deep learning applied
+is the ask the right question and understand what the answers mean
+you have to take a step back
+and look at the difference the
+distinction the level degrees of what the album is accomplishing for example image classification is not necessarily seen understanding in fact it's very far from seeing understanding classification may be very far from understanding
+and the data sets
+can vary drastically across a different benchmarks in the data sets used the professionally done photographs versus synthetically generated images versus Real World data
+and the real world data is where the big impact is so often times this one doesn't transfer to the other
+that's the challenge of deep learning
+solving all of these problems of different lighting various is a pose variation inter-class variation all the things that we take for granted human beings without incredible perception system all have to be solved in order to gain greater and greater understanding of a scene and all the other things we have to close the gap on that we're not even close to yet here's an image from the car under capati blog from a few years ago of a former President Obama stepping on a scale we can classify we can do semantic segmentation we can do a little bit of it take for granted we can't tell the images in the mirrors
+verses in reality is different we can't deal with a sparsity of information just a few pixels on President Obama's face we can still identify as the president
+the 3D structure of the scene that there's a foot on top of a scale that there's a human beings behind with from a single image things we can trivia do using all the common sense imaginology we have cannot do the physics of the scene that there's Gravity the in the biggest thing the hardest thing is what's on people's minds and what's on people's minds about what's on other people's minds and so on mental models of the world being able to infer what people are thinking about
+but we're not even close to solving that problem either but what they're thinking about we're not even we haven't even begun to really think about that problem and we do truly as human beings
+antique at the core of that I think I'm harboring on the visual perception problem because this one we take really for granted as human beings especially when trying to solve real-world problem especially when trying to sell a thymus driving is woop have 540 million years of data for visual perception so we take it for granted we don't realize how difficult it is and what kind of focus all our attention on this recent development of a hundred thousand years of being able to reason but the visual perception is never less extremely difficult at all at every single layer of what's required to perceive interpret and understand the fundamentals of a scene
+SNL trivial way to show that is just all the ways you can mess with these image classification systems by adding a little bit of noise the last few years there's been a lot of papers a lot of work to show that you can mess with these systems by adding noise secure with 99% accuracy predict the dog at a little bit of distortion immediately the system predicts with 99% accuracy as an ostrich and you can do that kind of manipulation we just a single Pixel so that's just a clean way to show the gap between image classification on an artificial datacell like imagenet and real-world perception that has to be solved especially For Life critical situations like driving
+I really like this Max tegmark visualization this rising sea from that of the landscape of human competence from a Hans moravec
+and
+this is the difference as we progressed forward and we discussed some of these machine learning methods is there is the human intelligence the general human intelligence let's call Einstein here that's able to generalize over all kinds of problems over all kinds of from the common sense to the incredibly complex
+and then there is the way we've been doing especially data-driven machine learning which is savants which is specialized intelligence extremely smart at a particular task but not being able to transfer except in the very narrow neighborhood on this little landscape of different of art cinematography book riding at the Peaks and chess arithmetic and fear improving and vision at the at the bottom in the lake and there's this rising sea as we saw a problem after problem the question can the methodology in in the approach of deep learning of everything we're doing now keep the sea rising or do find them at the breakers have to happen in order to generalize and solve these problems and so from the specialized where the successes are the systems are
+essentially boiled down to give the data set and given the ground Truth for that dataset here's the apartment cost in the Boston area be able to input several parameters and based on those parameters predict the apartment cost
+that's the basic premise approach behind the successes successful supervised deep Learning Systems today
+you have good enough data that's good enough ground truth and can be formalized we can solve it
+some of the recent promise that we will do an entire series of lectures in the third week on deep reinforcement learning show that
+from raw sensory information but with very little annotation to self play with their systems learn
+without human supervision
+are able to perform extremely well and he's constraint contacts the question of a video game here pong to pixels female to perceive the raw pixels of the spawn game as raw input and learn the fundamental quote on quote physics of this game understand how it is this game behaved and how to be able to win this game that's kind of a step toward general-purpose but it is a very small situation real-world problems from the top supervised learning where majority of the teaching is done by human beings who have The annotation examples
+and further and further down to semi-supervised learning reinforcement learning unsupervised learning removing the teacher from the picture and making that teacher extremely efficient when is needed
+of course did augmentation is is 1 ways we'll talk about it so taking a small number of examples and messing with that set of examples augmenting that side of examples through trivial and through complex methods of cropping stretching shifting and so on including through generative networks modifying those images to grow a small dataset into a large one to minimize to decrease further and further the input that to human is the input of the human teacher but still that's quite far away from the incredibly efficient both teaching and learning the humans do this is
+a video and there's many of them online for the first time I've ate a human baby walking
+we learn to do this and it's one shot learning
+one day you're on for all fours and the next day you put your two hands up and then you figure out the rest one shot
+well you can kind of
+Rush Inn, play it on with it but the point is extremely efficient with only a few examples are able to learn the fundamental aspect of how to solve a particular problem
+machines the most cases
+need thousands millions and sometimes more examples depending on the life critical nature of the application
+the dataflow
+of
+a supervised Learning Systems is there an input data into Learning System and there is output
+now the in the training stage for the output we have the ground truth and so
+we use that ground with the teacher system in the testing stage when it goes out into the wild there's new import data over which route to generalize with learning system after me car best gas in the training stage that the processes with neural networks is giving him for dinner for which we have the ground truth passes through the model get the prediction and given that we have the ground truth we can compare the prediction to the ground truth look at the air and basement are adjust the weights the types of predictions we can make is aggression and classification progressives a continuous
+classification categorical
+here if you look at what we look at whether the regression problem says what is the temperature going to be tomorrow in the classification formulations that problem says is it going to be hot or cold with some special definition of what hot or cold is that's regression classification on the classification front and could be multi-class which is the standard formulation with your task was saying what is there's only one thing and then
+and overall the input to the system can be not just a single
+a sample of the particular data set and the output doesn't have to be a particular sample of the ground crew dataset it can be a sequence sequence to sequence a single sample to a sequence sequence to sample and so on for video captioning or it's video captioning to translation to natural language generation 2 of course the one to one computer General computer vision okay that's the bigger picture of Iran
+brain the biological neural networks in our brain and the computational block that is behind a lot of the intelligence and in our mind
+dietitian Iran has inputs with weights on them plus a bias and activation function and output
+it's inspired by this thing so I showed it before here visualizes the Tillamook Oracle system with 3 million neurons and 476 million synapses the full brain has a hundred billion billion neurons
+and
+a thousand trillion synapses
+resume and some of the other state-of-the-art networks having a tens hundreds of millions of edges of synapses
+the human brain has
+10 million times more synapses than artificial neurons neural networks and there's other differences the
+the apology is a synchronous and not constructed in layers the learning algorithm for artificial neural networks is backpropagation for
+all biological networks you don't know that's one of the Mysteries of the human brain these ideas but we really don't know the power consumption human brains are much more efficient than you on that works that's one of the problems that we're trying to solve and A6 are starting to begin to solve some of these problems and the stages of learning in the biological neural networks you really never stop learning you're always learning always changing both in the hardware and software
+in artificial neural networks oftentimes there's a training State there's a distinct training stage and there's a distinct testing stage when you release the thing in the wild online learning is an exceptionally difficult thing that we're still still in the very early stages of
+listen Quran
+takes a few Imports the fundamental computational block behind you on that works takes a few inputs applies weights which of the parameters that are learned some of them up putting into a nonlinear activation function after adding the bias also also learned parameter and gives an output and the task of this neuron is to get excited based on certain aspects of the layers features inputs to follow before and in that ability to discriminate get excited by certain things and get not excited but other things hold a little piece of information of whatever level abstraction it is so when you combine many of them together
+you have knowledge different levels of Saxons form a knowledge-based is able to represent understand or even act on a particular set of raw inputs and you stack these neurons together in layers in width and depth increasing further on and there is a lot of different architecture variance but they begin at this basic fact that we just a single hidden layer of a neural network the possibilities are endless you can approximate in any arbitrary function
+adding a annual network with a single hidden layer and approximate any function that means any other neural network with multiple layers and so on is just
+interesting optimizations of how we can discover those functions
+the possibilities are endless
+and the other aspect here is the mathematical underpinnings of neural networks with the weights and the differentiable activation functions I such that in a few steps from the inputs the outputs
+are deeply parallelizable
+and that's why the other aspect on the compute the paralyzed ability of neural networks is what enables some of the exciting advancements on the graphical Processing Unit the gpus and with a 6 gpus the ability to run across
+across machines across GPU unit's in a very large distributed scale to be able to train and perform inference on you on that works activation functions
+this activation function put together
+are tasks without tomatoes in a loss function
+progression that lost function is
+mean squared error usually there's a lot of areas and four classifications cross entropy loss in the cross entropy loss the ground truth is 01 in the music where there it's
+it's it's a real number
+and so with the loss function and the weights in the bias and the activation functions propagating forward to the network from the input to the output using the Lost function we use the algorithm backpropagation
+I wish I didn't Tire Electra last time
+to adjust the weights
+to have the air flow backwards to the network and it just the way such that once again the weights that were responsible for
+for producing the correct output are
+increase in the weights that were responsible for producing the incorrect output decreased
+the fordpass gives you the error the backward pass compute the gradients and Basin the gradients the optimization algorithm combined with a learning rate adjust the weights
+learning rate is how fast the network learns and all of this is possible
+on the numerical complication side with automatic differentiation
+optimization problem giving those Grady instead of computers and the backward flow to the network of the gradients is stochastic gradient descent there's a lot of errands to this optimization algorithms to solve various problems from dying really used to vanish ingredients
+is a lot of different parameters on momentum
+and so on that's really boil down to all the different problems that ourselves not in the optimization Maybach size
+what is the right size of a batch or really is called mini Batman it's not the entire data set
+do you based on which to compute the gradients to just learning do you do it over a very large amount or do you do it with stochastic gradient descent that for every single sample of the data
+if you listen to y'all laocoon the lotto recent literature is small me about sizes a good he says training with large many batches is bad for your health more importantly is bad for your tests are friends don't let friends use many batches larger than 32 larger batch size means more complications speed
+Xerox update Waze is often but smaller back size empirically produces better generalization
+the power were often on a broader scale of learning trying to solve is overfitting
+and the way was solid as the regular station
+we want to train on a dataset without memorizing to an extent that you only do well in that train dataset
+she wanted to be generalizable into future into the into the future things that you haven't seen yet
+so obviously this is a problem for small data sets and also four sets of parameters that you choose here shown an example of a sine curve trying to fit particular data versus 9th degree polynomial trying to fit a particular set of data with the blue dots the 9th degree polynomials overfitting it does very well for that particular set of samples but does not generalize well in the general case
+and the trade-off here is as you train further and further
+at a certain point there's a deviation between the the error being decreased 2-0 on the training set and going to one on the test set and that's the balance with the strike that's done with the validation set
+so you take a piece of the train separation of the ground truth and you called the validation set and you set aside and you evaluate the performance of your system on that validation set and
+after you notice that your train network is performing poorly on the validation set for a long. Of time that's when you stopped that's early stoppage basic is getting better and better and better and then there is some. Of time is always noise of course and after some. Of time is definitely getting worse Knotts we need to stop there
+so that provides an automated way to Discovery one need to stop and there's a lot of other regularisation methodologies course Dimension Dropout is very interesting approach for and its variants of Simply with a certain kind of probability
+randomly remove nodes in the network
+both incoming and outgoing edges randomly throughout the training process
+and there's normalization
+normalization is
+obviously always applied at the input so whenever you have a dataset as different lighting condition different variations of different sources and so on you have to all kind of put on the same level ground so that we're learning the fundamental aspects of the input data as opposed to the some some less relevant semantic information like lighting mirrors and so on so I usually always normalize for example if it's computer vision with pixels from 0 to 2:55
+the thing that enabled
+a lot of breakthrough performances in the past few years back normalization is performing this kind of same normalization later on in the network looking at the inputs to the hidden layers and normalizing based on the batch of data which which your training normalize based on the mean and the standard deviation as batch normalization with batch renormalization fix the few of the challenges which is given that your normalizing during the training
+on the mibox in the training dataset that doesn't directly map to the infant stage in the testing and so it allows by keeping a running average it's a crossbow training and testing you're able to asymptotic we approach a global normalization so this idea across all the way not just the inputs across all the way to normalize is the normalize the world in the all the levels of abstraction of the Year for me and Backstreet a lot of these problems doing in France and there's a lot of other ideas from layer to wait and you can play
+at what is all of this in this world is deep learning from computer vision to deep reinforcement learning to the different small low-tech needs to the large natural language processing so, Lucien you on that works the thing that enables image classification so these convolutional filters slide over the Imogen are able to take advantage of the spatial and variance of visual information that a cat in the top left corner is the same as teachers assoc with cats in the top right corner and so on images are just a set of numbers and our task is to take that image and produce a classification and use the spatial in the special variants of visual information to make that
+to slide a convolution filter across the image and learn that filter as supposed to supposed to sign an equal value to features that are present in various at various regions of the image and stacked on top of each other these convolution filters can form
+high-level abstraction of visual information and images with Alex Nets as I've mentioned and the imagenet dataset and challenge captivating the world of what's possible and you'll networks have been further and further improved superseding human human performance with a special note Google not with the Inception module just different ideas that came along with the residual blocks
+NFC net most recently
+so the object detection problem is a step the next step in the visual recognition so the image classification is just saying what's in the image object localization is saying find all the objects of interest in the scene and classify them
+the region based methods like showing here fast rcnn takes the image use a convolution neural network to extract Peterson that image and generates region proposals here's a bunch of candidates they should look at and within those candidates it classifies what they are and generates a four parameters the Bounty box that the that's that thing that captures that thing so object detection localization ultimately boils down to a box
+a rectangle with a class that's the most likely class that's in that Bonnie box
+and you can really summarize region based methods as you generate the region proposal here a little pseudocode and do a for Loop over the over the region proposals and perform detection on the on that for Loop
+the single shot methods remove the for loop as a single pass through a bunch of take for example here showing SSD take a pre-trained neural network has been trained do image classification stack a bunch of compositional layers on top from each layer extract teachers that are then able to generate in a single pass classes the bounding boxes Bonnie box predictions and the classics
+the trade-off here in this is where the popular yellow b123 come from the
+the trade-off here oftentimes is in performance and accuracy
+single shot methods are often less performing especially on interest accuracy on objects the really far away or rather obviously the small name into a really large
+then the next step up in visual perception visual understanding is semantic segmentation that's where the tutorial that were presented here on GitHub discovering the boundaries of what is taking a shower and then having which is performing with a decoder up sampling in a day sway the
+digging that representation upsampling
+the pixel level classification is a lot of tricks that will talk through their interesting but ultimately boils down to the encoding step of forming a representation was going on the scene and then decoding stop that up samples the pixel level annotation classification of all the individual pixels as I mentioned here the most expensive
+is transfer learning
+most commonly applied
+weight of transfer learning is taking a pre trained you on that work like last night and dropping it off at some point shopping out the fully connected layer layers some ass with some parts of the layers and then taking a dataset
+that a new dataset and retraining that Network so what what is this useful for for every single application computer vision and Industry when you have a specific application
+like you want to build a pedestrian detector you want to build a pedestrian detector and you have a pedestrian dataset it's useful to take resin that trained on imagenet okoko trained in the general case of vision perception and take a network dropping off some layers and then retraining on your specialized pedestrian dataset and depending on how large that is that is
+some of the previous layers that from The. Tremont pre-trained Network should be fixed Frozen and sometimes not depending on how large the data is and this is extremely effective in a computer vision but also an audio speech and NLP
+it's always a mess with the pre-trained networks
+they are ultimately forming representations of the data based on which classifications are aggression is made predictions made
+but cleanest example of this is the autoencoder Performing representations in an unsupervised way the output the input is an image in the output is that exact same image so why do we do that if you add a bottleneck in the network where there is where the network is
+now we're at the in the middle that is on the inputs and outputs it's forced to compress the did it down into meaningful representation that's what the autoencoder does IT training it to reproduce the output and reproduce it with a late representation that is smaller than the original raw data that's a really powerful way to compress the data it's used for
+I do want to train it in a supervised the way you want to train it on a discriminative task will you have labeled data and the network is strange identify cat versus dog that Network this training the discriminative way on an annotated supervised learning way is able to form better representation but nevertheless the concept stands and one way to visualize these Concepts is the tool that I really love projector
+methodology of
+Afghans is to have two networks one is the generator one of the discriminator and they compete against each other in order to for the generator
+to get better and better and better generating realistic images the generators task from noise to generate images based on certain representation that are realistic and the discriminator is the
+the critic that has to discriminate between real images and those generated by the generator and both get better together
+the generator gets better and better a generator real images to trick the discriminator and discriminated gets better and better at
+Tony's Italian difference real fake until the generator until the generous able to generate some incredible things to show me here and by the work with Nvidia mean the the ability to generate realistic faces as skyrocketed in the past three years so that these are samples of celebrities photos that have been able to generate those are all generated by Gann there's ability to generate temporally consistent video overtime and the ability showing at the bottom right
+the natural language processing World same for me representations forming embeddings with
+I Want You Back ability to from words to form representation that are officially able to then be used to reason about the words the whole idea of forming representation about the data is taking a huge you know of a copy of a million words you want to be able to map and into a space where words that are far apart from each other
+are in in the euclidean sense and euclidean distance to words are our semantically far apart from each other as well
+two things that are similar are together in that space and one way of doing that with skip grams for example is looking at a source text and turning into a large body of text into a supervised learning Problem by learning to map predict from the word from a particular word to all its neighbors so training that work on the connections that are commonly seen in natural language and based on those connections you able to know which words are related to each other now the main thing here
+is and I won't get into too many details but the main thing here with the input back to representing the words and the output of Act 2 representing the probability that those words are connected to each other the main thing both are thrown away in the end the main thing is the middle the hidden layer does all that representation gives you the embedding that represent these words in such a way where in the euclidean space the ones that are close together semantically
+are cemented together in the ones that are not our semantically far apart
+and
+natural language
+and other sequence data text speech audio video
+relies on recurrent neural networks able to learn temporal data a temporal Dynamics in the data
+sequence data and are able to generate sequence data the challenges that they're not able to learn
+long-term context because when enrolling annual network is trained by enrolling and doing backpropagation without any tricks to buy propagation of the gradient Fades away very quickly so you're not able to memorize the contacts in a longer form of the sentences unless there's extensions here with with lstm since your I use long-term dependency is captured by allowing the network to forget information allow it to freely pass through information in time
+what to forget what to remember and every time decide what to output and all of those aspects have Gates that are all trainable
+was sick more than 10 H functions
+bidirectional recurrent neural networks
+from the 90s is an extension often used for providing context in both directions so recurrent neural networks simply Divine vanilla whey is learning representations what happened in the past now many cases you're able it's not real time operation in that you're able to also look into the future you looking to the day of the falls after the sequence so benefits you do a forward pass through the network beyond the current and then back
+the encoder decoder architecture and not recording on that works use very much when the sequence on the input and the secrets of the output are not relied to be of the same length
+that you have the task is to First with the encoder Network encode everything that's came everything in the input sequence this is useful for machine translation for example so encoding all the information they put sequins in English and then in the language of translating to given that representation keep feeding it into the decoder recurring you on that work to generate the translation the input might be much smaller than the output that's the encoder decoder
+architecture and then there's improvements
+attention
+is the Improvement on the same quarter Dakota architecture that allows you to as opposed to taking the input sequence forming representation of it and that's it allows you to actually look back a different parts of the input so not just lying in the on the single Vector representation of all the entire input
+and a lot of excitement
+has been around the idea is that mentions some of the dream of artificial intelligence and machine learning in general has been to remove the human more and more and more from the picture debate being able to automate some of the difficult tasks so automl from Google and just the general concept architecture search
+the
+ability to automate the discovery of
+parameters of a neural network
+and the ability to discover the actual architecture that produces the best result so with neural architecture search your basic basic modules similar to the resident modules and with a recurring you on that work you keep assembling and that work together
+invalid and assembling in such a way that it minimizes the loss of the overall classification performance
+and it's shown that you can none construct annual Network that much more efficient and much more accurate than state-of-the-art
+on castigation classic imagenet here shown with a plot
+at the very least competitive with the state-of-the-art CNet it's super exciting that as opposed to like I said stacking Lego pieces yourself the final result is essentially you step back and you say here's I have a data set with the with the labels with the ground truth which is what Google the dream you tell me what kind of will do best on this data set and that's it so all you bring
+and deeper enforcement learning taking further steps along the path of decreasing human input
+deep reinforcement learning is the task of an agent to act in the world based on the observations of the state and there was receiving that state knowing very little about the world and learning from the very sparse nature their Ward sometimes only one you in in the gaming contacts when you win or lose or in the robotics contest when you successfully accomplish your task and not with that very sparse award I able to learn how to behave in that world here with with cats learning how the Bell maps to the food and a lot of the amazing work at openai and he'd mind up about the robotics manipulation and navigation through self play in simulated environments and of course the best are our own a different person learning competition with deep traffic that all of you can participate and I encourage you to try to win that would know supervised knowledge
+no no human supervision through sparse rewards from the simulation or through self play contracts able to learn how to operate successfully in this world
+and those are the steps were taking towards General towards artificial general intelligence this is the exciting from
+from the Breakthrough ideas that will talk about on Wednesday natural language processing to generative adversarial networks able to generate arbitrary data high-resolution data create data really from this understanding of the world to deep reinforcement learning be able to learn how to act in the world very little input from Human supervision is taking further and further steps and there's been a lot of exciting ideas going but different names sometimes misused sometimes overused sometimes misinterpreted of transfer learning meta learning and hyperparameter architecture search basically removing from the menial tasks and involving a human only in the humans at least pretend to be quite good as which is understanding
+bottom right I show that's our job here in this room are job for all the engineers in the world to solve these problems and progressed forward through the current summer and through the winter if it ever comes over that I'd like to thank you and you can get the videos code and so on online deep learning that I met you the idea thank you very much
