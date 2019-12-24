@@ -33,10 +33,7 @@ def analyze_Video_without_displaying(videoFilePath, resize=False):
         frame = np.dstack([frame, frame, frame])
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rects = face_detect(gray, 0)
-        #print(rects.count(rects))
-        print("func")
         emotion_recognition(rects, gray, model, predictor_landmarks)
-        print("func2")
     fvs.stop()
 
 
