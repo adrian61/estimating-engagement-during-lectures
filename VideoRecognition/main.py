@@ -33,7 +33,10 @@ def analyze_Video_without_displaying(videoFilePath, resize=False):
         frame = np.dstack([frame, frame, frame])
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rects = face_detect(gray, 0)
+        #print(rects.count(rects))
+        print("func")
         emotion_recognition(rects, gray, model, predictor_landmarks)
+        print("func2")
     fvs.stop()
 
 
@@ -183,7 +186,7 @@ def analyze_Video_with_displaying(videoFilePath, resize=False):
 
 
 def main():
-    analyze_Video_with_displaying("Videos/Manifestacja.mp4")
+    analyze_Video_without_displaying("Videos/Manifestacja.mp4")
 
 
 if __name__ == "__main__":
