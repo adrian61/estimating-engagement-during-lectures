@@ -4,7 +4,7 @@ from imutils import face_utils
 from scipy.ndimage import zoom
 
 
-def emotion_recognition(rects, gray, model, predictor_landmarks, shape_x=48, shape_y=48):
+def emotion_recognition_f(rects, gray, model, predictor_landmarks, shape_x=48, shape_y=48):
     for (i, rect) in enumerate(rects):
 
         shape = predictor_landmarks(gray, rect)
@@ -36,17 +36,32 @@ def emotion_recognition(rects, gray, model, predictor_landmarks, shape_x=48, sha
         # 4 - Sad
         # 5 - Surprise
         # else Neutral
-        print("Total score for {n} is {s}".format(n=prediction_result, s=valueOfEmotion(prediction_result)))
+        print("Total score for {n} is {s}".format(n=prediction_result, s=valueOfEmotion(prediction[0])))
     print("Next frame")
 
 
-def valueOfEmotion(number):
+def valueOfEmotion(prediction):
     SumOfValue = 0
+    temp = 0
     # 3d affect space
     # first value - Arousal
     # second value - Valence
     # third value - Stance
-    Angry = {5, -5, -4}
+    Emotions = [[5, -5, -4], [2.5, -4.5, 0], [4, -5, 3], [4, 5, 5], [-4, -5, -2], [5, 0, 0], [0, 0, 0]]
+    # 0 - Angry
+    # 1 - Disgust
+    # 2 - Fear
+    # 3 - Happy
+    # 4 - Sad
+    # 5 - Surprise
+    # 6 - Neutral
+    for i in range(0, len(Emotions)):
+        for x in Emotions[i]:
+            temp += x
+        SumOfValue += temp / 3 * prediction[i]
+    return round(SumOfValue, 3)
+
+    """Angry = {5, -5, -4}
     Disgust = {2.5, -4.5, 0}
     Fear = {4, -5, 3}
     Happy = {4, 5, 5}
@@ -80,4 +95,5 @@ def valueOfEmotion(number):
     else:
         for x in Neutral:
             SumOfValue += x
-        return SumOfValue / 3
+        return SumOfValue / 3"""
+

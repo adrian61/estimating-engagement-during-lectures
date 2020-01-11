@@ -9,8 +9,8 @@ from imutils.video import FPS
 from imutils.video import FileVideoStream
 from scipy.ndimage import zoom
 
-from VideoRecognition.emotion_recognition import emotion_recognition
-from VideoRecognition.face_recognition import load_utilities_to_face_recognition, eye_aspect_ratio
+from emotion_recognition import emotion_recognition_f
+from face_recognition import load_utilities_to_face_recognition, eye_aspect_ratio
 
 ### Image processing ###
 
@@ -33,7 +33,7 @@ def analyze_Video_without_displaying(videoFilePath, resize=False):
         frame = np.dstack([frame, frame, frame])
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rects = face_detect(gray, 0)
-        emotion_recognition(rects, gray, model, predictor_landmarks)
+        emotion_recognition_f(rects, gray, model, predictor_landmarks)
     fvs.stop()
 
 
@@ -183,7 +183,7 @@ def analyze_Video_with_displaying(videoFilePath, resize=False):
 
 
 def main():
-    analyze_Video_without_displaying("Videos/Manifestacja.mp4")
+    analyze_Video_without_displaying("Videos/abc.mp4")
 
 
 if __name__ == "__main__":
