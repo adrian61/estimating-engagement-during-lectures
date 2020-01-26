@@ -1,4 +1,7 @@
+import numpy as np
 from PyQt5.QtWidgets import QFileDialog, QLabel
+import matplotlib.pyplot as plt
+
 from main import analyze_Video_without_displaying
 from PyQt5.QtWidgets import  QVBoxLayout, QSizePolicy, QWidget
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -55,9 +58,9 @@ class Window(QWidget):
 
 class PlotCanvas(FigureCanvas):
 
-    def __init__(self, parent=None, width=5, height=4, dpi=100, data=None):
+    def __init__(self, parent=None, width=1, height=1, dpi=100, data=None):
         fig = Figure(figsize=(width, height), dpi=dpi)
-        self.axes = fig.add_subplot(111)
+        #self.axes = fig.add_subplot(111)
         self.data = data
 
         FigureCanvas.__init__(self, fig)
@@ -73,7 +76,12 @@ class PlotCanvas(FigureCanvas):
     def plot(self):
         #data = [random.random() for i in range(25)]
         ax = self.figure.add_subplot(111)
-        ax.plot(self.data, 'r-')
+        ax.set_yticks([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])
+        ax.set_ylim([-5, 5])
+        ax.grid(True)
         ax.set_title('Zainteresowanie')
+        ax.plot(self.data)
+        ax.autoscale(axis='x', tight=True)
+
         self.draw()
 

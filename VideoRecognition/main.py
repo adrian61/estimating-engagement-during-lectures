@@ -6,7 +6,7 @@ import imutils
 import numpy as np
 import GUI
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication
 from imutils import face_utils
 from imutils.video import FPS
 from imutils.video import FileVideoStream
