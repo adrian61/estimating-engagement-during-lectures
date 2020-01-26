@@ -4,6 +4,8 @@ from __future__ import division
 import cv2
 import imutils
 import numpy as np
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from imutils import face_utils
 from imutils.video import FPS
 from imutils.video import FileVideoStream
@@ -19,6 +21,13 @@ global shape_y
 global input_shape
 global nClasses
 
+def window():
+    app = QApplication(sys.argv)
+    win = QMainWindow()
+    win.setWindowTitle("Pomiar zainteresowania")
+    win.setMinimumSize(800, 600)
+    win.show()
+    sys.exit(app.exec_())
 
 def analyze_Video_without_displaying(videoFilePath, resize=False):
     model, face_detect, predictor_landmarks = load_utilities_to_face_recognition()
@@ -183,7 +192,8 @@ def analyze_Video_with_displaying(videoFilePath, resize=False):
 
 
 def main():
-    analyze_Video_without_displaying("Videos/abc.mp4")
+    window()
+    #analyze_Video_without_displaying("Videos/abc.mp4")
 
 
 if __name__ == "__main__":
