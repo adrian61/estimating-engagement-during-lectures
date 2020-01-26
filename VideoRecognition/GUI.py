@@ -38,7 +38,7 @@ class Window(QWidget):
         self.add_plot()
 
     def add_plot(self):
-        plot_canvas = PlotCanvas(width=5, height=4)
+        plot_canvas = PlotCanvas(width=5, height=4, data=[1, 2, 0, 1, 3, 5])
         self.layout.addWidget(plot_canvas)
 
     def add_file_label(self):
@@ -56,9 +56,10 @@ class Window(QWidget):
 
 class PlotCanvas(FigureCanvas):
 
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
+    def __init__(self, parent=None, width=5, height=4, dpi=100, data=None):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
+        self.data = data
 
         FigureCanvas.__init__(self, fig)
         self.setParent(parent)
@@ -71,8 +72,8 @@ class PlotCanvas(FigureCanvas):
 
 
     def plot(self):
-        data = [random.random() for i in range(25)]
+        #data = [random.random() for i in range(25)]
         ax = self.figure.add_subplot(111)
-        ax.plot(data, 'r-')
+        ax.plot(self.data, 'r-')
         ax.set_title('Zainteresowanie')
         self.draw()
