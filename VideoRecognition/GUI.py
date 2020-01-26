@@ -1,20 +1,8 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog, QLabel
-from PyQt5.QtGui import QIcon
-
+from PyQt5.QtWidgets import QFileDialog, QLabel
+from main import analyze_Video_without_displaying
+from PyQt5.QtWidgets import  QVBoxLayout, QSizePolicy, QWidget
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
-
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QVBoxLayout, QSizePolicy, QMessageBox, QWidget, QPushButton
-
-
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
-
-import random
-
 
 class Window(QWidget):
 
@@ -23,7 +11,7 @@ class Window(QWidget):
         self.title = 'Szacowanie zainteresowania'
         self.filename = ''
         self.layout = QVBoxLayout()
-        self.file_label = QLabel()
+        self.status_label = QLabel()
 
         self.initUI()
 
@@ -34,11 +22,22 @@ class Window(QWidget):
         self.filename = self.openFileNameDialog()
         self.show()
 
-        self.add_file_label()
-        self.add_plot()
+        self.file_label = self.add_file_label()
+        self.add_status_label()
+        self.run_video_analysis()
 
-    def add_plot(self):
-        plot_canvas = PlotCanvas(width=5, height=4, data=[1, 2, 0, 1, 3, 5])
+
+    def run_video_analysis(self):
+        result = analyze_Video_without_displaying(self.filename)
+        self.add_plot(result)
+        self.status_label.setText('Analiza ukończona. Wyniki na wykresie poniżej.')
+
+    def add_status_label(self):
+        self.status_label.setText("Trwa analiza pliku. To może chwilę zająć.")
+        self.layout.addWidget(self.status_label)
+
+    def add_plot(self, data):
+        plot_canvas = PlotCanvas(width=50, height=5, data=data)
         self.layout.addWidget(plot_canvas)
 
     def add_file_label(self):
@@ -49,7 +48,7 @@ class Window(QWidget):
     def openFileNameDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        filename, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
+        filename, _ = QFileDialog.getOpenFileName(self, "Wybierz plik do analizy", "",
                                                   "Wszystkie pliki (*);;Plik wideo (*.mp4)", options=options)
         if filename:
             return filename
@@ -77,3 +76,4 @@ class PlotCanvas(FigureCanvas):
         ax.plot(self.data, 'r-')
         ax.set_title('Zainteresowanie')
         self.draw()
+
