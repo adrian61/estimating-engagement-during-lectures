@@ -4,6 +4,9 @@ from __future__ import division
 import cv2
 import imutils
 import numpy as np
+import GUI
+import sys
+from PyQt5.QtWidgets import QApplication
 from imutils import face_utils
 from imutils.video import FPS
 from imutils.video import FileVideoStream
@@ -23,6 +26,7 @@ global nClasses
 def analyze_Video_without_displaying(videoFilePath, resize=False):
     model, face_detect, predictor_landmarks = load_utilities_to_face_recognition()
     fvs = FileVideoStream(videoFilePath).start()
+    interest_values = []
     while fvs.more():
         frame = fvs.read()
         if frame is None:
@@ -33,13 +37,14 @@ def analyze_Video_without_displaying(videoFilePath, resize=False):
         frame = np.dstack([frame, frame, frame])
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rects = face_detect(gray, 0)
-        emotion_recognition_f(rects, gray, model, predictor_landmarks)
+        interest_values.append(emotion_recognition_f(rects, gray, model, predictor_landmarks))
     fvs.stop()
+    return interest_values
 
 
-def analyze_Video_with_displaying(videoFilePath, resize=False):
-    shape_x=48
-    shape_y=48
+def analyze_video_with_displaying(videoFilePath, resize=False):
+    shape_x = 48
+    shape_y = 48
     (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
     (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
     (nStart, nEnd) = face_utils.FACIAL_LANDMARKS_IDXS["nose"]
@@ -183,7 +188,12 @@ def analyze_Video_with_displaying(videoFilePath, resize=False):
 
 
 def main():
-    analyze_Video_without_displaying("Videos/abc.mp4")
+    app = QApplication(sys.argv)
+    ex = GUI.Window()
+    sys.exit(app.exec_())
+
+    # results = analyze_Video_without_displaying("Videos/abc.mp4")
+    # print(results)
 
 
 if __name__ == "__main__":
