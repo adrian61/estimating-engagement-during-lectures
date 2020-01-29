@@ -22,6 +22,7 @@ global shape_y
 global input_shape
 global nClasses
 
+
 def analyze_Video_without_displaying(videoFilePath, resize=False):
     model, face_detect, predictor_landmarks = load_utilities_to_face_recognition()
     fvs = FileVideoStream(videoFilePath).start()
@@ -41,9 +42,9 @@ def analyze_Video_without_displaying(videoFilePath, resize=False):
     return interest_values
 
 
-def analyze_Video_with_displaying(videoFilePath, resize=False):
-    shape_x=48
-    shape_y=48
+def analyze_video_with_displaying(videoFilePath, resize=False):
+    shape_x = 48
+    shape_y = 48
     (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
     (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
     (nStart, nEnd) = face_utils.FACIAL_LANDMARKS_IDXS["nose"]
@@ -191,8 +192,9 @@ def main():
     ex = GUI.Window()
     sys.exit(app.exec_())
 
-    #results = analyze_Video_without_displaying("Videos/abc.mp4")
-    #print(results)
+    # results = analyze_Video_without_displaying("Videos/abc.mp4")
+    # print(results)
+
 
 if __name__ == "__main__":
     main()
