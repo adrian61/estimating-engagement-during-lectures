@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QRunnable, QThreadPool
 from PyQt5.QtWidgets import QFileDialog, QLabel, QHBoxLayout
 
-from main import analyze_Video_without_displaying
+from main import analyze_Video_without_displaying, analyze_video_with_displaying
 from PyQt5.QtWidgets import QVBoxLayout, QSizePolicy, QWidget
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -71,7 +71,7 @@ class Runnable(QRunnable):
         self.result_destination = result_destination
 
     def run(self):
-        result = analyze_Video_without_displaying(self.filename)
+        result = analyze_video_with_displaying(self.filename)
         self.result_destination.analysis_finished(result)
 
 
