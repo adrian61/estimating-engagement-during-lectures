@@ -71,8 +71,8 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rects = face_detect(gray, 0)
 
+        frame_values = []
         for (i, rect) in enumerate(rects):
-            frame_values = []
             shape = predictor_landmarks(gray, rect)
             shape = face_utils.shape_to_np(shape)
 
@@ -180,7 +180,8 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
             ebl = shape[eblStart:eblEnd]
             eblHull = cv2.convexHull(ebl)
             cv2.drawContours(frame, [eblHull], -1, (0, 255, 0), 1)
-            interest_values.append(sum(frame_values) / len(frame_values))
+
+        interest_values.append(sum(frame_values) / len(frame_values))
 
         cv2.putText(frame, 'Number of Faces : ' + str(len(rects)), (40, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, 155, 1)
 
