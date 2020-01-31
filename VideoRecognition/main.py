@@ -13,6 +13,7 @@ from imutils.video import FileVideoStream
 from scipy.ndimage import zoom
 
 from emotion_recognition import emotion_recognition_f
+from emotion_recognition import valueOfEmotion
 from face_recognition import load_utilities_to_face_recognition, eye_aspect_ratio
 
 ### Image processing ###
@@ -53,8 +54,9 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
     (eblStart, eblEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eyebrow"]
     (ebrStart, ebrEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eyebrow"]
     model, face_detect, predictor_landmarks = load_utilities_to_face_recognition()
-    fvs = FileVideoStream("Videos/Manifestacja.mp4").start()
+    fvs = FileVideoStream(videoFilePath).start()
     fps = FPS().start()
+    interest_values = []
     while fvs.more():
         frame = fvs.read()
         if frame is None:
@@ -68,8 +70,9 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
                     (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rects = face_detect(gray, 0)
-        for (i, rect) in enumerate(rects):
 
+        frame_values = []
+        for (i, rect) in enumerate(rects):
             shape = predictor_landmarks(gray, rect)
             shape = face_utils.shape_to_np(shape)
 
@@ -91,6 +94,9 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
 
             # Make Prediction
             prediction = model.predict(face)
+
+            frame_values.append(valueOfEmotion(prediction[0]))
+
             prediction_result = np.argmax(prediction)
 
             # Rectangle around the face
@@ -175,6 +181,8 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
             eblHull = cv2.convexHull(ebl)
             cv2.drawContours(frame, [eblHull], -1, (0, 255, 0), 1)
 
+        interest_values.append(sum(frame_values) / len(frame_values))
+
         cv2.putText(frame, 'Number of Faces : ' + str(len(rects)), (40, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, 155, 1)
 
         cv2.imshow("Frame", frame)
@@ -182,9 +190,10 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
         fps.update()
     fps.stop()
     print("[INFO] elapsed time: {:.2f}".format(fps.elapsed()))
-    print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
+    #print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
     cv2.destroyAllWindows()
     fvs.stop()
+    return interest_values
 
 
 def main():
