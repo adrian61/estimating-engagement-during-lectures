@@ -1,7 +1,8 @@
 from PyQt5.QtCore import QRunnable, QThreadPool
 from PyQt5.QtWidgets import QFileDialog, QLabel, QHBoxLayout
 
-from VideoRecognition.main import analyze_Video_without_displaying, analyze_video_with_displaying
+from VideoRecognition.main import *
+
 from PyQt5.QtWidgets import QVBoxLayout, QSizePolicy, QWidget
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -21,29 +22,34 @@ class Window(QWidget):
         self.file_info_layout = QHBoxLayout()
         self.status_info_layout = QHBoxLayout()
         self.result_plot = PlotCanvas()
+        self.NLP_plot = PlotCanvas()
         self.init_UI()
 
     def init_UI(self):
         self.setLayout(self.layout)
         self.setWindowTitle(self.title)
-        self.setMinimumSize(800, 600)
+        self.setMinimumSize(800, 1000)
         self.filename = self.open_file_name_dialog()
         self.show()
 
         self.layout.addLayout(self.file_info_layout)
         self.layout.addLayout(self.status_info_layout)
-        self.result_plot.plot(title="Zainteresowanie", data=[0])
+        self.result_plot.plot(title="Zainteresowanie na podstawie analizy video", data=[0])
+        self.NLP_plot.plot(title="Zainteresowanie na podstawie analizy audio (NLP)", data=[0])
         self.layout.addWidget(self.result_plot)
+        self.layout.addWidget(self.NLP_plot)
 
         self.add_file_label()
         self.add_status_label()
 
         analysis = RunnableVideoRecognition(self.filename, self)
+        nlp_analysis = RunnableNLP(self.filename, self)
         QThreadPool.globalInstance().start(analysis)  # Run analysis in a separate thread
+        QThreadPool.globalInstance().start(nlp_analysis)  # Run analysis in a separate thread
 
     def analysis_finished(self, result):
         self.status_label.setText('Analiza ukończona. Wyniki na wykresie poniżej.')
-        self.result_plot.plot(result, 'Zainteresowanie')  # Update plot with result
+        self.result_plot.plot(result, 'Zainteresowanie na podstawie analizy video')  # Update plot with result
 
     def add_status_label(self):
         self.status_label.setText("Trwa analiza pliku. To może chwilę zająć.")
@@ -85,9 +91,8 @@ class RunnableNLP(QRunnable):
         self.result_destination = result_destination
 
     def run(self):
-        timestamps, valance_smoothed, arousal_smoothed, dominance_smoothed = NLP_analysis("data/vid2_short.mp4")
-        result = analyze_video_with_displaying(self.filename)
-        self.result_destination.analysis_finished(result)
+        timestamps, valance_smoothed, arousal_smoothed, dominance_smoothed = NLP_analysis(self.filename)
+        self.result_destination.NLP_plot.plot_NLP(timestamps, arousal_smoothed)
 
 
 class PlotCanvas(FigureCanvas):
@@ -115,5 +120,20 @@ class PlotCanvas(FigureCanvas):
             data = [0]
         ax.plot(data)
         ax.autoscale(axis='x', tight=True)
+        self.draw()
 
+    def plot_NLP(self, timestamps, data):
+        if data is None:
+            data = [0]
+            timestamps = [0]
+        ax = self.figure.add_subplot(111)
+        ax.set_ylim([0, 1])
+        # ax.set_xlim([timestamps[1], timestamps[-1]])
+        ax.grid(True)
+        # ax.set_title("arousal smoothed")
+        ax.set_ylabel('score')
+        ax.set_xlabel('time')
+        # ax.plot(timestamps, data)
+        ax.plot(data)
+        ax.autoscale(axis='x', tight=True)
         self.draw()

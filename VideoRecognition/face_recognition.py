@@ -12,7 +12,7 @@ def eye_aspect_ratio(eye):
 
 
 def load_model():
-    model = lm('Models/video.h5')
+    model = lm('VideoRecognition/Models/video.h5')
     return model
 
 
@@ -22,7 +22,7 @@ def load_face_detect():
 
 
 def load_prediction():
-    predictor_landmarks = dlib.shape_predictor("Models/face_landmarks.dat")
+    predictor_landmarks = dlib.shape_predictor("VideoRecognition/Models/face_landmarks.dat")
     return predictor_landmarks
 
 

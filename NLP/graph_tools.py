@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def moving_average(a, n=30):
+def moving_average(a, n=10):
     """
     This is just to smooth/average the graph.
     """
