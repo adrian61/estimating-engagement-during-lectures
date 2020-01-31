@@ -53,8 +53,9 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
     (eblStart, eblEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eyebrow"]
     (ebrStart, ebrEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eyebrow"]
     model, face_detect, predictor_landmarks = load_utilities_to_face_recognition()
-    fvs = FileVideoStream("Videos/Manifestacja.mp4").start()
+    fvs = FileVideoStream(videoFilePath).start()
     fps = FPS().start()
+    interest_values = []
     while fvs.more():
         frame = fvs.read()
         if frame is None:
@@ -182,15 +183,17 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
         fps.update()
     fps.stop()
     print("[INFO] elapsed time: {:.2f}".format(fps.elapsed()))
-    print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
+    #print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
     cv2.destroyAllWindows()
     fvs.stop()
 
 
 def main():
-    app = QApplication(sys.argv)
-    ex = GUI.Window()
-    sys.exit(app.exec_())
+    #app = QApplication(sys.argv)
+    #ex = GUI.Window()
+    #sys.exit(app.exec_())
+
+    analyze_video_with_displaying("Videos/abc.mp4")
 
     # results = analyze_Video_without_displaying("Videos/abc.mp4")
     # print(results)

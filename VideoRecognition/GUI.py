@@ -17,7 +17,7 @@ class Window(QWidget):
         self.status_label = QLabel()
         self.file_info_layout = QHBoxLayout()
         self.status_info_layout = QHBoxLayout()
-        self.result_plot = PlotCanvas(width=50, height=5)
+        self.result_plot = PlotCanvas()
         self.init_UI()
 
     def init_UI(self):
@@ -87,7 +87,8 @@ class PlotCanvas(FigureCanvas):
                                    QSizePolicy.Expanding,
                                    QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
-        self.plot(data, title)
+        if data is not None:
+            self.plot(data, title)
 
     def plot(self, data, title):
         ax = self.figure.add_subplot(111)
