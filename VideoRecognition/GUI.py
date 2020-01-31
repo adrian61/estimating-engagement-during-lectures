@@ -1,10 +1,13 @@
 from PyQt5.QtCore import QRunnable, QThreadPool
 from PyQt5.QtWidgets import QFileDialog, QLabel, QHBoxLayout
 
-from main import analyze_Video_without_displaying, analyze_video_with_displaying
+from VideoRecognition.main import analyze_Video_without_displaying, analyze_video_with_displaying
 from PyQt5.QtWidgets import QVBoxLayout, QSizePolicy, QWidget
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+
+from NLP.main import NLP_analysis
+import matplotlib.pyplot as plt
 
 
 class Window(QWidget):
@@ -35,7 +38,7 @@ class Window(QWidget):
         self.add_file_label()
         self.add_status_label()
 
-        analysis = Runnable(self.filename, self)
+        analysis = RunnableVideoRecognition(self.filename, self)
         QThreadPool.globalInstance().start(analysis)  # Run analysis in a separate thread
 
     def analysis_finished(self, result):
@@ -64,13 +67,25 @@ class Window(QWidget):
             return filename
 
 
-class Runnable(QRunnable):
+class RunnableVideoRecognition(QRunnable):
     def __init__(self, filename, result_destination):
         super().__init__()
         self.filename = filename
         self.result_destination = result_destination
 
     def run(self):
+        result = analyze_video_with_displaying(self.filename)
+        self.result_destination.analysis_finished(result)
+
+
+class RunnableNLP(QRunnable):
+    def __init__(self, filename, result_destination):
+        super().__init__()
+        self.filename = filename
+        self.result_destination = result_destination
+
+    def run(self):
+        timestamps, valance_smoothed, arousal_smoothed, dominance_smoothed = NLP_analysis("data/vid2_short.mp4")
         result = analyze_video_with_displaying(self.filename)
         self.result_destination.analysis_finished(result)
 

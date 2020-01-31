@@ -194,16 +194,3 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
     cv2.destroyAllWindows()
     fvs.stop()
     return interest_values
-
-
-def main():
-    app = QApplication(sys.argv)
-    ex = GUI.Window()
-    sys.exit(app.exec_())
-
-    # results = analyze_Video_without_displaying("Videos/abc.mp4")
-    # print(results)
-
-
-if __name__ == "__main__":
-    main()
