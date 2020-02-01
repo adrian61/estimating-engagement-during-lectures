@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QRunnable, QThreadPool
 from PyQt5.QtWidgets import QFileDialog, QLabel, QHBoxLayout
 
+from VideoRecognition.frame_rate import get_frame_rate
 from VideoRecognition.main import *
 
 from PyQt5.QtWidgets import QVBoxLayout, QSizePolicy, QWidget
@@ -88,8 +89,8 @@ class RunnableVideoRecognition(QRunnable):
         self.result_destination = result_destination
 
     def run(self):
-        result = analyze_video_with_displaying(self.filename)
-        # result = analyze_Video_without_displaying(self.filename)
+        # result = analyze_video_with_displaying(self.filename)
+        result = analyze_Video_without_displaying(self.filename)
         self.result_destination.analysis_finished(result)
 
 
@@ -127,7 +128,11 @@ class PlotCanvas(FigureCanvas):
         ax.set_title(title)
         if data is None:
             data = [0]
+
         ax.plot(data)
+        import matplotlib
+        formatter = matplotlib.ticker.FuncFormatter(lambda ms, x: ms/ get_frame_rate("C:/Users/Adrian/Desktop/vid2_short.mp4"))
+        ax.xaxis.set_major_formatter(formatter)
         ax.autoscale(axis='x', tight=True)
         self.draw()
 
