@@ -14,12 +14,11 @@ from VideoRecognition.emotion_recognition import emotion_recognition_f
 from VideoRecognition.emotion_recognition import valueOfEmotion
 from VideoRecognition.face_recognition import load_utilities_to_face_recognition, eye_aspect_ratio
 
-import tensorflow as tf
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-tf.keras.backend.set_session(tf.Session(config=config))
+# import tensorflow as tf
+# config = tf.ConfigProto()
+# config.gpu_options.allow_growth = True
+# tf.keras.backend.set_session(tf.Session(config=config))
 
-import matplotlib.pyplot as plt
 
 
 ### Image processing ###
@@ -190,15 +189,12 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
 
         cv2.putText(frame, 'Number of Faces : ' + str(len(rects)), (40, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, 155, 1)
 
-        # plt.imshow(frame)
-        # plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
-        # plt.show()
-
-        # cv2.imshow("Frame", frame)
-        # cv2.waitKey(1)
+        cv2.imshow("Frame", frame)
+        cv2.waitKey(1)
         fps.update()
 
     fps.stop()
+    cv2.destroyAllWindows()
     print("[INFO] elapsed time: {:.2f}".format(fps.elapsed()))
     #print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
 

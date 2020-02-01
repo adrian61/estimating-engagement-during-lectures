@@ -8,7 +8,15 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 from NLP.main import NLP_analysis
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
+
+
+
+# import tensorflow as tf
+# config = tf.ConfigProto()
+# config.gpu_options.allow_growth = True
+# tf.keras.backend.set_session(tf.Session(config=config))
+
 
 
 class Window(QWidget):
@@ -81,6 +89,7 @@ class RunnableVideoRecognition(QRunnable):
 
     def run(self):
         result = analyze_video_with_displaying(self.filename)
+        # result = analyze_Video_without_displaying(self.filename)
         self.result_destination.analysis_finished(result)
 
 

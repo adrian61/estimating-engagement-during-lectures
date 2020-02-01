@@ -40,7 +40,7 @@ def emotion_recognition_f(rects, gray, model, predictor_landmarks, shape_x=48, s
         frame_values.append(valueOfEmotion(prediction[0]))
         #print("Total score for {n} is {s}".format(n=prediction_result, s=valueOfEmotion(prediction[0])))
     #print("Next frame")
-    return sum(frame_values) / len(frame_values)
+    return sum(frame_values) / max(1, len(frame_values))
 
 
 def valueOfEmotion(prediction):

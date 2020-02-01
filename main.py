@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import QApplication
 from VideoRecognition import GUI
 import sys
 
-import matplotlib.pyplot as plt
-from NLP.main import NLP_analysis
+# import matplotlib.pyplot as plt
+# from NLP.main import NLP_analysis
 
 
 def main():
