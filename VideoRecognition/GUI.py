@@ -10,13 +10,15 @@ from matplotlib.figure import Figure
 from NLP.main import NLP_analysis
 # import matplotlib.pyplot as plt
 
+import numpy as np
+import pandas as pd
+
 
 
 # import tensorflow as tf
 # config = tf.ConfigProto()
 # config.gpu_options.allow_growth = True
 # tf.keras.backend.set_session(tf.Session(config=config))
-
 
 
 class Window(QWidget):
@@ -52,8 +54,8 @@ class Window(QWidget):
 
         analysis = RunnableVideoRecognition(self.filename, self)
         nlp_analysis = RunnableNLP(self.filename, self)
-        QThreadPool.globalInstance().start(analysis)  # Run analysis in a separate thread
         QThreadPool.globalInstance().start(nlp_analysis)  # Run analysis in a separate thread
+        QThreadPool.globalInstance().start(analysis)  # Run analysis in a separate thread
 
     def analysis_finished(self, result):
         self.status_label.setText('Analiza ukończona. Wyniki na wykresie poniżej.')
@@ -88,8 +90,9 @@ class RunnableVideoRecognition(QRunnable):
         self.result_destination = result_destination
 
     def run(self):
-        result = analyze_video_with_displaying(self.filename)
-        # result = analyze_Video_without_displaying(self.filename)
+        # result = analyze_video_with_displaying(self.filename)
+        result = analyze_Video_without_displaying(self.filename)
+        pd.DataFrame(result).to_csv("results/interest_from_video.csv")
         self.result_destination.analysis_finished(result)
 
 
@@ -101,7 +104,10 @@ class RunnableNLP(QRunnable):
 
     def run(self):
         timestamps, valance_smoothed, arousal_smoothed, dominance_smoothed = NLP_analysis(self.filename)
-        self.result_destination.NLP_plot.plot_NLP(timestamps, arousal_smoothed)
+        # result = (valance_smoothed + arousal_smoothed) / 2
+        result = arousal_smoothed
+        pd.DataFrame(result).to_csv("results/interest_from_audio.csv")
+        self.result_destination.NLP_plot.plot_NLP(timestamps, result)
 
 
 class PlotCanvas(FigureCanvas):
