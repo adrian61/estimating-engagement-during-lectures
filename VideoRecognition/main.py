@@ -4,20 +4,24 @@ from __future__ import division
 import cv2
 import imutils
 import numpy as np
-import GUI
-import sys
-from PyQt5.QtWidgets import QApplication
+
 from imutils import face_utils
 from imutils.video import FPS
 from imutils.video import FileVideoStream
 from scipy.ndimage import zoom
 
-from emotion_recognition import emotion_recognition_f
-from emotion_recognition import valueOfEmotion
-from face_recognition import load_utilities_to_face_recognition, eye_aspect_ratio
+from VideoRecognition.emotion_recognition import emotion_recognition_f
+from VideoRecognition.emotion_recognition import valueOfEmotion
+from VideoRecognition.face_recognition import load_utilities_to_face_recognition, eye_aspect_ratio
+
+# import tensorflow as tf
+# config = tf.ConfigProto()
+# config.gpu_options.allow_growth = True
+# tf.keras.backend.set_session(tf.Session(config=config))
+
+
 
 ### Image processing ###
-
 global shape_x
 global shape_y
 global input_shape
@@ -181,29 +185,23 @@ def analyze_video_with_displaying(videoFilePath, resize=False):
             eblHull = cv2.convexHull(ebl)
             cv2.drawContours(frame, [eblHull], -1, (0, 255, 0), 1)
 
-        interest_values.append(sum(frame_values) / len(frame_values))
+        interest_values.append(sum(frame_values) / max(1, len(frame_values)))
 
         cv2.putText(frame, 'Number of Faces : ' + str(len(rects)), (40, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, 155, 1)
 
         cv2.imshow("Frame", frame)
         cv2.waitKey(1)
         fps.update()
+
     fps.stop()
+    cv2.destroyAllWindows()
     print("[INFO] elapsed time: {:.2f}".format(fps.elapsed()))
     #print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
-    cv2.destroyAllWindows()
+
     fvs.stop()
     return interest_values
 
 
-def main():
-    app = QApplication(sys.argv)
-    ex = GUI.Window()
-    sys.exit(app.exec_())
-
-    # results = analyze_Video_without_displaying("Videos/abc.mp4")
-    # print(results)
 
 
-if __name__ == "__main__":
-    main()
+# cv2.destroyAllWindows()
