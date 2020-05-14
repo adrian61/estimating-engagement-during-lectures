@@ -3,9 +3,13 @@ group project created for the subject: competence project
 
 The application allows you to calculate interest in a lecture based on detected emotions, and based on the lecturer's way of speaking.
 We used algorithm to calculate interest from this document: https://ieeexplore.ieee.org/abstract/document/1632035
+
 L = W x I
+
 L - level of interest
+
 W - weight of emotion
+
 I - intensity of emotion
 
 ## How to run?
