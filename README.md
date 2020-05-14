@@ -28,5 +28,3 @@ Then you will see such a window:
 ## How to make a correct recording?
 You need to point the camera to your audience and record it, and enable recording of your voice.
 
-## How well does it work?
-We have conducted tests and the application is able to calculate correctly interest for 2-3 people.
