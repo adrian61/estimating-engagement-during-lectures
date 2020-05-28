@@ -12,6 +12,7 @@ W - weight of emotion
 
 I - intensity of emotion
 
+The second module (analyzing lecturer's way of speaking) analyzing words. Words such as scandal, attention, alert focus on the lecturer. The second module analyzes such dependencies.
 ## How to run?
 
 Firstly you need to choose recorded video from lecture
