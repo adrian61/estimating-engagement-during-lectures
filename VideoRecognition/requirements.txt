@@ -5,4 +5,4 @@ imutils
 tensorflow==1.15.2
 Keras==2.2.2
 Numpy==1.15.4
-opencv-python==4.0.0.21
+opencv-python==4.1.1.26
